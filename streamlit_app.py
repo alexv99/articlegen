@@ -1,6 +1,5 @@
 import streamlit as st
 from langchain.llms import OpenAI
-from langchain.llms import GPT
 from langchain.chains import SingleModelChain
 
 st.title('Quickstart App')
@@ -13,7 +12,7 @@ def generate_response(input_text):
         "max_tokens": 100
     }
     # Create a GPT object with the configuration
-    gpt = GPT(**gpt_config)
+    gpt = OpenAI(**gpt_config)
 
     # Instantiate LangChain with the GPT model
     chain = SingleModelChain(gpt)
