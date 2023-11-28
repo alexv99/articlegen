@@ -1,12 +1,12 @@
 import streamlit
-from langchain.llms import OpenAI
+from langchain.llms.openai import OpenAI
 
 streamlit.title('Quickstart App')
 
 
 def generate_response(input_text):
     # Initialize LangChain
-    llm = OpenAI()
+    llm = OpenAI(model_name="gpt-4")
     # Prompt GPT-4
     response = llm.invoke(input_text)
     streamlit.info(response)
