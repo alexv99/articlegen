@@ -1,20 +1,14 @@
 import streamlit
-import langchain
+from langchain.llms import OpenAI
 
 streamlit.title('Quickstart App')
 
 
 def generate_response(input_text):
-
     # Initialize LangChain
-    chat = langchain.LLM(
-        model_id="gpt-4",
-    )
-
+    llm = OpenAI()
     # Prompt GPT-4
-    prompt = "Write a poem about the beauty of nature."
-    response = chat.call(prompt)
-
+    response = llm.invoke(input_text)
     streamlit.info(response)
 
 
