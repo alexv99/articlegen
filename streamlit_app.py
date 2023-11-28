@@ -1,29 +1,25 @@
-import streamlit as st
-from langchain.llms import OpenAI
-from langchain.chains import SingleModelChain
+import streamlit
+import langchain
 
-st.title('Quickstart App')
+streamlit.title('Quickstart App')
+
 
 def generate_response(input_text):
-    llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key, model_name="gpt-4")
-    # Configuration for GPT-4
-    gpt_config = {
-        "model_name": "gpt-4",
-        "max_tokens": 100
-    }
-    # Create a GPT object with the configuration
-    gpt = OpenAI(**gpt_config)
 
-    # Instantiate LangChain with the GPT model
-    chain = SingleModelChain(gpt)
+    # Initialize LangChain
+    chat = langchain.LLM(
+        model_id="gpt-4",
+    )
 
-    # Sending a prompt to GPT-4 and getting a response
-    response = chain.run(input_text)  
+    # Prompt GPT-4
+    prompt = "Write a poem about the beauty of nature."
+    response = chat.call(prompt)
 
-    st.info(response)
+    streamlit.info(response)
 
-with st.form('my_form'):
-  text = st.text_area('Enter text:', 'What are the three key pieces of advice for learning how to code?')
-  submitted = st.form_submit_button('Submit')
-  if submitted:
-    generate_response(text)
+
+with streamlit.form('my_form'):
+    text = streamlit.text_area('Enter text:', 'What are the three key pieces of advice for learning how to code?')
+    submitted = streamlit.form_submit_button('Submit')
+    if submitted:
+        generate_response(text)
